@@ -1,28 +1,36 @@
 import React from 'react'
-import { Button, Divider, Layout, Text } from '@ui-kitten/components'
-import { Image, ImageBackground, TouchableOpacity, View } from 'react-native'
+import { Layout, Text } from '@ui-kitten/components'
+import {
+  Alert,
+  ImageBackground,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import styles from './styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const ProductItem = ({ imageUri, price, name, onHeartPress, isFavorite }) => {
-
   // IOS don't allow unsecure http requests. Replace http with https.
   const secureConn = imageUri.replace(/^http:/, 'https:')
-  
+
   const favoriteIcon = isFavorite
     ? { icon: 'heart', color: 'red' }
     : { icon: 'heart', color: 'white' }
 
   return (
-    <Layout style={styles.layout} level='2'>
-      <Layout style={styles.header} level='4'>
+    <Layout style={styles.layout} level="2">
+      <Layout style={styles.header} level="4">
         <ImageBackground
           source={{ uri: secureConn }}
           resizeMode="cover"
           style={styles.productImage}
-          imageStyle={{borderRadius:6}}
+          imageStyle={{ borderRadius: 6 }}
           onError={error => {
-            console.log(error)
+            console.warn('Image Error: ' + error.nativeEvent)
+            Alert.alert(
+              'Image Error: ',
+              'An error occurred while fetching images. Try to reopen the app. If it persists, connect with the developer.'
+            )
           }}>
           <TouchableOpacity onPress={onHeartPress}>
             <Icon
@@ -34,7 +42,7 @@ const ProductItem = ({ imageUri, price, name, onHeartPress, isFavorite }) => {
           </TouchableOpacity>
         </ImageBackground>
       </Layout>
-      <Layout style={styles.footer} level='3'>
+      <Layout style={styles.footer} level="3">
         <View style={styles.infoBox}>
           <Text style={styles.price} status="success">
             {price} ₺

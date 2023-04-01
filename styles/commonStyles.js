@@ -40,7 +40,7 @@ const commonStyles = StyleSheet.create({
     alignItems: 'center',
   },
   marginCommon: {
-    margin: sizes.general.ml,
+    margin: sizes.general.md,
   },
   paddingCommon: {
     padding: sizes.general.ml,

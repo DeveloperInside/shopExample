@@ -5,9 +5,9 @@ import handleAPICall from 'utils/redux/handleAPICall'
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async (_, { rejectWithValue }) => {
+  async (params, { rejectWithValue }) => {
     const products = await handleAPICall({
-      apiCall: () => productsAPI.fetch('page=1&limit=12'),
+      apiCall: () => productsAPI.fetch(params),
       errorCallback,
       rejectWithValue,
     })

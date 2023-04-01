@@ -5,17 +5,23 @@ import { REDUX_ERROR, REDUX_IDLE, REDUX_PENDING, REDUX_SUCCESS } from 'constants
 const initialState = {
   status: REDUX_IDLE,
   products: [],
+  currentPage: 1,
+  fetchLimit: 12,
   error: {},
 }
 
 export const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {},
+  reducers: {
+    fetchMore: (state) => {
+      state.currentPage += 1
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.products = action.payload
+        state.products = [...state.products, ...action.payload]
         state.status = REDUX_SUCCESS
       })
       .addCase(fetchProducts.pending, state => {
@@ -27,5 +33,7 @@ export const productsSlice = createSlice({
       })
   },
 })
+
+export const { fetchMore } = productsSlice.actions
 
 export default productsSlice.reducer

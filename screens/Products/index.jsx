@@ -5,22 +5,41 @@ import { Layout } from '@ui-kitten/components'
 import { ProductItem } from 'components/componentList'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from 'redux/slices/products/extraActions'
-import { selectCurrentPage, selectFetchLimit, selectProducts } from 'redux/slices/products/selectors'
-import { fetchMore } from 'redux/slices/products/slice'
+import {
+  selectCurrentPage,
+  selectFavorites,
+  selectFetchLimit,
+  selectProducts,
+} from 'redux/slices/products/selectors'
+import { addToFavorites, fetchMore, removeFromFavorites } from 'redux/slices/products/slice'
 
 const Products = () => {
   const dispatch = useDispatch()
   const productList = useSelector(selectProducts)
   const currentPage = useSelector(selectCurrentPage)
   const fetchLimit = useSelector(selectFetchLimit)
+  const favorites = useSelector(selectFavorites)
 
   useEffect(() => {
-    const fetchQuery = 'page='+currentPage+'&limit='+fetchLimit
+    const fetchQuery = 'page=' + currentPage + '&limit=' + fetchLimit
     dispatch(fetchProducts(fetchQuery))
   }, [currentPage, fetchLimit])
 
+
+
   const renderProducts = ({ item }) => {
-    return <ProductItem imageUri={item.image} name={item.name} price={item.price} />
+    const isFavorite = favorites.some((product) => product.id === item.id);
+    const handleHeartPress = () => {
+      if(isFavorite){
+        dispatch(removeFromFavorites(item))
+        return
+      }
+      dispatch(addToFavorites(item))
+    }
+
+    return (
+      <ProductItem imageUri={item.image} name={item.name} price={item.price} isFavorite={isFavorite} onHeartPress={()=>handleHeartPress(item)}/>
+    )
   }
 
   const handleScrollEnd = () => {
@@ -29,7 +48,6 @@ const Products = () => {
 
   return (
     <Layout style={styles.container}>
-      <Text>Products</Text>
       <Layout style={styles.productsWrapper}>
         <FlatList
           numColumns={2}

@@ -12,12 +12,14 @@ const styles = StyleSheet.create({
     ...commonStyles.paddingCommon,
   },
   header: {
-    height: 150,
+    height: 120,
   },
   footer: {
     padding: sizes.general.ms,
+    marginTop: sizes.general.ms,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    borderRadius: 8
   },
   infoBox: {
     flex: 1,
@@ -25,7 +27,7 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
   productImage: {
-    resizeMode: 'contain',
+    alignItems:'flex-end',
     ...commonStyles.cover,
   },
   price: {
@@ -43,7 +45,9 @@ const styles = StyleSheet.create({
   cartIcon: {
     color: '#f5f5f5',
   },
-
+  heart:{
+    padding: sizes.general.ms,
+  }
 })
 
 export default styles

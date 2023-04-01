@@ -1,10 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchProducts } from './extraActions'
-import { REDUX_ERROR, REDUX_IDLE, REDUX_PENDING, REDUX_SUCCESS } from 'constants/constants'
+import {
+  REDUX_ERROR,
+  REDUX_IDLE,
+  REDUX_PENDING,
+  REDUX_SUCCESS,
+} from 'constants/constants'
 
 const initialState = {
   status: REDUX_IDLE,
   products: [],
+  favorites: [],
   currentPage: 1,
   fetchLimit: 12,
   error: {},
@@ -14,9 +20,17 @@ export const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    fetchMore: (state) => {
+    fetchMore: state => {
       state.currentPage += 1
-    }
+    },
+    addToFavorites: (state, action) => {
+      state.favorites = [...state.favorites, action.payload]
+    },
+    removeFromFavorites: (state, action) => {
+      state.favorites = state.favorites.filter(
+        product => product.id !== action.payload.id
+      )
+    },
   },
   extraReducers: builder => {
     builder
@@ -34,6 +48,6 @@ export const productsSlice = createSlice({
   },
 })
 
-export const { fetchMore } = productsSlice.actions
+export const { fetchMore, addToFavorites, removeFromFavorites } = productsSlice.actions
 
 export default productsSlice.reducer

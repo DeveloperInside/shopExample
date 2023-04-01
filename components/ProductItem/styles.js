@@ -1,15 +1,49 @@
 import { StyleSheet } from 'react-native'
-import theme from '../../styles/colors'
+import commonStyles, { sizes } from 'styles/commonStyles'
 
 const styles = StyleSheet.create({
   layout: {
-    backgroundColor: 'gray',
-    flexGrow:1,
-    height: 200
+    flex: 1,
+    flexGrow: 1,
+    borderWidth: 1,
+    borderColor: 'rgb(238, 238, 238)',
+    borderRadius: 16,
+    ...commonStyles.marginCommon,
+    ...commonStyles.paddingCommon,
   },
-  text: {
-    textAlign: 'center',
-  }
+  header: {
+    height: 150,
+  },
+  footer: {
+    padding: sizes.general.ms,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  infoBox: {
+    flex: 1,
+    flexGrow:1,
+    marginRight: 6,
+  },
+  productImage: {
+    resizeMode: 'contain',
+    ...commonStyles.cover,
+  },
+  price: {
+    marginVertical: sizes.general.sm,
+    fontSize: 13.5,
+    color: '#00B383',
+    fontWeight: '500',
+  },
+  button: {
+    backgroundColor: '#3366FF',
+    paddingHorizontal: sizes.general.md,
+    borderRadius: 8,
+    ...commonStyles.center
+  },
+  cartIcon: {
+    color: '#f5f5f5',
+  },
+
 })
 
 export default styles

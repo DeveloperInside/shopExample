@@ -1,8 +1,8 @@
 import { Text } from 'react-native'
 import React from 'react'
-import { ProductItem } from '../../components/componentList'
-import { Layout } from '@ui-kitten/components'
 import styles from './styles'
+import { Layout } from '@ui-kitten/components'
+import { ProductItem } from 'components/componentList'
 
 const Products = () => {
   return (

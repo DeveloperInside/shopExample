@@ -42,6 +42,13 @@ const commonStyles = StyleSheet.create({
   marginCommon: {
     margin: sizes.general.ml,
   },
+  paddingCommon: {
+    padding: sizes.general.ml,
+  },
+  cover: {
+    width: '100%',
+    height: '100%',
+  }
 })
 
 export default commonStyles

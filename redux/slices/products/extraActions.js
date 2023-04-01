@@ -7,7 +7,7 @@ export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async (_, { rejectWithValue }) => {
     const products = await handleAPICall({
-      apiCall: () => productsAPI.fetch(),
+      apiCall: () => productsAPI.fetch('page=1&limit=12'),
       errorCallback,
       rejectWithValue,
     })

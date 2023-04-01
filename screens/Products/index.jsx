@@ -5,18 +5,26 @@ import { Layout } from '@ui-kitten/components'
 import { ProductItem } from 'components/componentList'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from 'redux/slices/products/extraActions'
-import { selectProducts } from 'redux/slices/products/selectors'
+import { selectCurrentPage, selectFetchLimit, selectProducts } from 'redux/slices/products/selectors'
+import { fetchMore } from 'redux/slices/products/slice'
 
 const Products = () => {
   const dispatch = useDispatch()
   const productList = useSelector(selectProducts)
+  const currentPage = useSelector(selectCurrentPage)
+  const fetchLimit = useSelector(selectFetchLimit)
 
   useEffect(() => {
-    dispatch(fetchProducts())
-  }, [])
+    const fetchQuery = 'page='+currentPage+'&limit='+fetchLimit
+    dispatch(fetchProducts(fetchQuery))
+  }, [currentPage, fetchLimit])
 
   const renderProducts = ({ item }) => {
     return <ProductItem imageUri={item.image} name={item.name} price={item.price} />
+  }
+
+  const handleScrollEnd = () => {
+    dispatch(fetchMore())
   }
 
   return (
@@ -27,9 +35,8 @@ const Products = () => {
           numColumns={2}
           data={productList}
           renderItem={renderProducts}
+          onEndReached={handleScrollEnd}
         />
-        {/* <ProductItem />
-        <ProductItem /> */}
       </Layout>
     </Layout>
   )

@@ -1,11 +1,14 @@
-import { View, Text } from 'react-native'
 import React from 'react'
+import { Layout, Text } from '@ui-kitten/components'
+import { Image } from 'react-native'
+import styles from './styles'
 
 const ProductItem = () => {
   return (
-    <View>
+    <Layout style={styles.layout}>
+        <Image />
       <Text>ProductItem</Text>
-    </View>
+    </Layout>
   )
 }
 

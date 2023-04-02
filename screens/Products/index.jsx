@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from 'react-native'
+import { FlatList } from 'react-native'
 import React, { useEffect } from 'react'
 import styles from './styles'
 import { Button, Layout } from '@ui-kitten/components'
@@ -43,7 +43,7 @@ const Products = () => {
   }
 
   const handleCartPress = (item, inCart) => {
-    if(inCart) {
+    if (inCart) {
       dispatch(removeFromCart(item))
       return
     }
@@ -61,7 +61,7 @@ const Products = () => {
         price={item.price}
         isFavorite={isFavorite}
         inCart={inCart}
-        onCartPress={ () => handleCartPress(item, inCart)}
+        onCartPress={() => handleCartPress(item, inCart)}
         onHeartPress={() => handleHeartPress(item, isFavorite)}
       />
     )

@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     ...commonStyles.container,
   },
   productsWrapper: {
-    flexDirection: 'row',
+    flex: 1
   },
   text: {
     textAlign: 'center',

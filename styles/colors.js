@@ -1,18 +1,16 @@
-import { StyleSheet } from "react-native"
-
 const colors = {
   light: {
-    shade1: '#5fd32e',
+    button: '#3366FF',
+    buttonText: '#f5f5f5',
+    price: '#00B383',
+    borderColor: '#eeeeee'
   },
   dark: {
-    shade1: '#2e4cd3',
-  },
+    button: '#3366FF',
+    buttonText: '#f5f5f5',
+    price: '#00B383',
+    borderColor: '#1e1e1e'
+  }
 }
 
-var activeTheme = 'dark'
-
-const theme = () => {
-  if (activeTheme === 'dark') return colors.dark
-}
-
-export default theme
+export default colors

@@ -16,6 +16,10 @@ const fonts = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: '500'
+  },
+  price: {
+    fontSize: 13.5,
+    fontWeight: '500'
   }
 })
 

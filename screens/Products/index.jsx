@@ -6,14 +6,17 @@ import { ProductItem } from 'components/componentList'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from 'redux/slices/products/extraActions'
 import {
+  selectCart,
   selectCurrentPage,
   selectFavorites,
   selectFetchLimit,
   selectProducts,
 } from 'redux/slices/products/selectors'
 import {
+  addToCart,
   addToFavorites,
   fetchMore,
+  removeFromCart,
   removeFromFavorites,
 } from 'redux/slices/products/slice'
 import { toggleTheme } from 'redux/slices/theme/slice'
@@ -24,21 +27,32 @@ const Products = () => {
   const currentPage = useSelector(selectCurrentPage)
   const fetchLimit = useSelector(selectFetchLimit)
   const favorites = useSelector(selectFavorites)
+  const cart = useSelector(selectCart)
 
   useEffect(() => {
     const fetchQuery = 'page=' + currentPage + '&limit=' + fetchLimit
     dispatch(fetchProducts(fetchQuery))
   }, [currentPage, fetchLimit])
 
+  const handleHeartPress = (item, isFavorite) => {
+    if (isFavorite) {
+      dispatch(removeFromFavorites(item))
+      return
+    }
+    dispatch(addToFavorites(item))
+  }
+
+  const handleCartPress = (item, inCart) => {
+    if(inCart) {
+      dispatch(removeFromCart(item))
+      return
+    }
+    dispatch(addToCart(item))
+  }
+
   const renderProducts = ({ item }) => {
     const isFavorite = favorites.some(product => product.id === item.id)
-    const handleHeartPress = () => {
-      if (isFavorite) {
-        dispatch(removeFromFavorites(item))
-        return
-      }
-      dispatch(addToFavorites(item))
-    }
+    const inCart = cart.some(product => product.id === item.id)
 
     return (
       <ProductItem
@@ -46,7 +60,9 @@ const Products = () => {
         name={item.name}
         price={item.price}
         isFavorite={isFavorite}
-        onHeartPress={() => handleHeartPress(item)}
+        inCart={inCart}
+        onCartPress={ () => handleCartPress(item, inCart)}
+        onHeartPress={() => handleHeartPress(item, isFavorite)}
       />
     )
   }

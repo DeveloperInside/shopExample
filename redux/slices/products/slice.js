@@ -11,6 +11,7 @@ const initialState = {
   status: REDUX_IDLE,
   products: [],
   favorites: [],
+  cart: [],
   currentPage: 1,
   fetchLimit: 12,
   error: {},
@@ -31,6 +32,14 @@ export const productsSlice = createSlice({
         product => product.id !== action.payload.id
       )
     },
+    addToCart: (state, action) => {
+      state.cart = [...state.cart, action.payload]
+    },
+    removeFromCart: (state, action) => {
+      state.cart = state.cart.filter(
+        product => product.id !== action.payload.id
+      )
+    },
   },
   extraReducers: builder => {
     builder
@@ -48,6 +57,7 @@ export const productsSlice = createSlice({
   },
 })
 
-export const { fetchMore, addToFavorites, removeFromFavorites } = productsSlice.actions
+export const { fetchMore, addToFavorites, removeFromFavorites, addToCart, removeFromCart } =
+  productsSlice.actions
 
 export default productsSlice.reducer

@@ -20,6 +20,10 @@ const fonts = StyleSheet.create({
   price: {
     fontSize: 13.5,
     fontWeight: '500'
+  },
+  badge: {
+    fontSize: 12,
+    fontWeight: '500'
   }
 })
 

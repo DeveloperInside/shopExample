@@ -1,3 +1,4 @@
 import ProductItem from "./ProductItem"
+import Badge from "./Badge"
 
-export { ProductItem }
+export { ProductItem, Badge }

@@ -29,40 +29,40 @@ const ProductItem = ({
     : { icon: 'cart-outline', color: colors.cart }
 
   return (
-    <Layout style={styles.layout} level="2">
-      <Layout style={styles.header} level="4">
-        <ImageBackground
-          source={{ uri: secureConn }}
-          resizeMode="cover"
-          style={styles.productImage}
-          imageStyle={{ borderRadius: 6 }}
-          onError={error => {
-            console.warn('Image Error: ' + error.nativeEvent)
-            Alert.alert(
-              'Image Error: ',
-              'An error occurred while fetching images. Try to reopen the app. If it persists, connect with the developer.'
-            )
-          }}>
-          <TouchableOpacity onPress={onHeartPress}>
-            <Icon
-              name={favoriteIcon.icon}
-              size={24}
-              color={favoriteIcon.color}
-              style={styles.heart}
-            />
+    <Layout style={styles.layout} level="1">
+      <Layout style={styles.contentWrapper} level='2' >
+        <Layout style={styles.header} level="4">
+          <ImageBackground
+            source={{ uri: secureConn }}
+            resizeMode="cover"
+            style={styles.productImage}
+            imageStyle={{ borderRadius: 6 }}
+            onError={error => {
+              console.warn('Image Error: ' + error.nativeEvent)
+              Alert.alert(
+                'Image Error: ',
+                'An error occurred while fetching images. Try to reopen the app. If it persists, connect with the developer.'
+              )
+            }}>
+            <TouchableOpacity onPress={onHeartPress}>
+              <Icon
+                name={favoriteIcon.icon}
+                size={24}
+                color={favoriteIcon.color}
+                style={styles.heart}
+              />
+            </TouchableOpacity>
+          </ImageBackground>
+        </Layout>
+        <Layout style={styles.footer} level="3">
+          <View style={styles.infoBox}>
+            <Text style={styles.price}>{price} ₺</Text>
+            <Text numberOfLines={2}>{name}</Text>
+          </View>
+          <TouchableOpacity style={styles.button} onPress={onCartPress}>
+            <Icon name={cartIcon.icon} color={cartIcon.color} size={18} />
           </TouchableOpacity>
-        </ImageBackground>
-      </Layout>
-      <Layout style={styles.footer} level="3">
-        <View style={styles.infoBox}>
-          <Text style={styles.price}>
-            {price} ₺
-          </Text>
-          <Text numberOfLines={2}>{name}</Text>
-        </View>
-        <TouchableOpacity style={styles.button} onPress={onCartPress}>
-          <Icon name={cartIcon.icon} color={cartIcon.color} size={18} />
-        </TouchableOpacity>
+        </Layout>
       </Layout>
     </Layout>
   )

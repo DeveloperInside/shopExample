@@ -9,8 +9,11 @@ const styles = () => {
 
   return StyleSheet.create({
     layout: {
-      flex: 1,
-      flexGrow: 1,
+      flex:1,
+      flexGrow:0.5,
+    },
+    contentWrapper: {
+      flexGrow:1,
       borderWidth: 1,
       borderColor: colors.borderColor,
       borderRadius: sizes.general.lg,
@@ -21,6 +24,7 @@ const styles = () => {
       height: 120,
     },
     footer: {
+      flexGrow:1,
       padding: sizes.general.ms,
       marginTop: sizes.general.ms,
       flexDirection: 'row',

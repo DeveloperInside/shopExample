@@ -6,16 +6,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import styles from './styles'
+import themedStyles from './styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const ProductItem = ({ imageUri, price, name, onHeartPress, isFavorite }) => {
   // IOS don't allow unsecure http requests. Replace http with https.
   const secureConn = imageUri.replace(/^http:/, 'https:')
 
+  const styles = themedStyles()
+
   const favoriteIcon = isFavorite
     ? { icon: 'heart', color: 'red' }
-    : { icon: 'heart', color: 'white' }
+    : { icon: 'heart-outline', color: 'white' }
 
   return (
     <Layout style={styles.layout} level="2">

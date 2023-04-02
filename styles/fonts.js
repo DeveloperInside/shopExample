@@ -21,10 +21,14 @@ const fonts = StyleSheet.create({
     fontSize: 13.5,
     fontWeight: '500'
   },
+  totalPrice: {
+    fontSize: 16,
+    fontWeight: '500'
+  },
   badge: {
     fontSize: 12,
     fontWeight: '500'
-  }
+  },
 })
 
 export default fonts

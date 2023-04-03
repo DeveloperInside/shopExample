@@ -3,6 +3,7 @@ import Details from '../screens/Details';
 import Favorites from '../screens/Favorites';
 import Products from '../screens/Products';
 import Profile from '../screens/Profile';
+import TabNavigation from './stacks/Tab';
 
 const screens = {
   Products: {
@@ -26,5 +27,12 @@ const screens = {
     component: Details,
   },
 };
+
+export const stacks = {
+  Tab: {
+    name: 'Tab',
+    component: TabNavigation
+  },
+}
 
 export default screens;

@@ -16,12 +16,14 @@ import {
   addToCart,
   addToFavorites,
   fetchMore,
+  pickProduct,
   removeFromCart,
   removeFromFavorites,
 } from 'redux/slices/products/slice'
 import { toggleTheme } from 'redux/slices/theme/slice'
+import screens from 'navigation/screenLinking'
 
-const Products = () => {
+const Products = ({navigation}) => {
   const dispatch = useDispatch()
   const productList = useSelector(selectProducts)
   const currentPage = useSelector(selectCurrentPage)
@@ -33,6 +35,11 @@ const Products = () => {
     const fetchQuery = 'page=' + currentPage + '&limit=' + fetchLimit
     dispatch(fetchProducts(fetchQuery))
   }, [currentPage, fetchLimit])
+
+  const handleProductPress = (item) => {
+    dispatch(pickProduct(item))
+    navigation.navigate(screens.Details.name)
+  }
 
   const handleHeartPress = (item, isFavorite) => {
     if (isFavorite) {
@@ -61,6 +68,7 @@ const Products = () => {
         price={item.price}
         isFavorite={isFavorite}
         inCart={inCart}
+        onPress={()=> handleProductPress(item)}
         onCartPress={() => handleCartPress(item, inCart)}
         onHeartPress={() => handleHeartPress(item, isFavorite)}
       />

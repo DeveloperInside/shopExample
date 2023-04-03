@@ -29,6 +29,15 @@ const fonts = StyleSheet.create({
     fontSize: 12,
     fontWeight: '500'
   },
+  productName: {
+    fontSize: 16,
+    fontWeight: '500'
+  },
+  brand: {
+    fontSize: 14,
+    letterSpacing: 1.5,
+    fontWeight: '400'
+  }
 })
 
 export default fonts

@@ -12,6 +12,7 @@ const initialState = {
   products: [],
   favorites: [],
   cart: [],
+  pickedProduct: {},
   currentPage: 1,
   fetchLimit: 12,
   error: {},
@@ -33,12 +34,15 @@ export const productsSlice = createSlice({
       )
     },
     addToCart: (state, action) => {
-      state.cart = [...state.cart, action.payload]
+      state.cart = [...state.cart, {...action.payload, count: 1}]
     },
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter(
         product => product.id !== action.payload.id
       )
+    },
+    pickProduct: (state, action) => {
+      state.pickedProduct = action.payload
     },
   },
   extraReducers: builder => {
@@ -57,7 +61,7 @@ export const productsSlice = createSlice({
   },
 })
 
-export const { fetchMore, addToFavorites, removeFromFavorites, addToCart, removeFromCart } =
+export const { fetchMore, addToFavorites, removeFromFavorites, addToCart, removeFromCart, pickProduct } =
   productsSlice.actions
 
 export default productsSlice.reducer

@@ -4,10 +4,12 @@ import reactotron from 'ReactotronConfig'
 import productsReducer from './slices/products/slice'
 import themeReducer from './slices/theme/slice'
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     products: productsReducer,
     theme: themeReducer
   },
   enhancers: [reactotron.createEnhancer()],
 })
+
+export default store

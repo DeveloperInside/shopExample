@@ -9,8 +9,8 @@ const Badge = ({ number }) => {
   const styles = themedStyles()
 
   return (
-    <View style={styles.bagde}>
-      <Text style={styles.text} >{number}</Text>
+    <View style={styles.bagde} testID="badge-component">
+      <Text style={styles.text}>{number}</Text>
     </View>
   )
 }

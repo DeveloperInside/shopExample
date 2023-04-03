@@ -4,7 +4,8 @@ const reactotron = {
   use: () => reactotron,
   connect: () => reactotron,
   clear: () => reactotron,
-  createEnhancer: () => reactotron
+  createEnhancer: () => reactotron,
+  setAsyncStorageHandler: () => reactotron,
 }
 
 module.exports = reactotron

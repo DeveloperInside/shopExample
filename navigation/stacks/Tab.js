@@ -72,7 +72,9 @@ const TabNavigation = () => {
   const favoritesBadge = useSelector(selectFavorites).length
 
   return (
-    <Tab.Navigator tabBar={props => <TabBar {...props} />}>
+    <Tab.Navigator
+      screenOptions={{ headerShown: false }}
+      tabBar={props => <TabBar {...props} />}>
       <Tab.Screen
         name={screens.Products.name}
         component={screens.Products.component}

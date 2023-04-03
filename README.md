@@ -6,10 +6,10 @@ Done:
 --async storage
 --ui kitten
 Todo:
--Details page
+-Details page +
 -Cart item count
 -Cart screen complete button
--header
+-header +
 -async storage redux
 -filter
 -search

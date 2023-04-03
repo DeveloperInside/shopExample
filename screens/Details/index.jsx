@@ -1,12 +1,16 @@
 import { View, Image, ScrollView } from 'react-native'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCart, selectPickedProduct } from 'redux/slices/products/selectors'
+import {
+  selectCart,
+  selectPickedProduct,
+} from 'redux/slices/products/selectors'
 import { Button, Input, Layout, Text } from '@ui-kitten/components'
 import themedStyles from './styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import screens, { stacks } from 'navigation/screenLinking'
 import { addToCart } from 'redux/slices/products/slice'
+import Header from 'components/Header'
 
 const Details = ({ navigation }) => {
   const styles = themedStyles()
@@ -33,6 +37,7 @@ const Details = ({ navigation }) => {
   console.log(secureImage)
   return (
     <Layout style={styles.container}>
+      <Header title="Details" />
       <Image
         source={{ uri: secureImage }}
         style={{ width: '100%', aspectRatio: 4 / 3 }}

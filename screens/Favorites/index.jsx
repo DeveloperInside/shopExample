@@ -2,12 +2,9 @@ import { FlatList } from 'react-native'
 import React from 'react'
 import styles from './styles'
 import { Button, Layout } from '@ui-kitten/components'
-import { ProductItem } from 'components/componentList'
+import { Header, ProductItem } from 'components/componentList'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  selectCart,
-  selectFavorites,
-} from 'redux/slices/products/selectors'
+import { selectCart, selectFavorites } from 'redux/slices/products/selectors'
 import {
   addToCart,
   addToFavorites,
@@ -61,13 +58,9 @@ const Favorites = () => {
 
   return (
     <Layout style={styles.container}>
-      <Button onPress={handleTheme}>SwitchTheme</Button>
+      <Header title="Favorites" />
       <Layout style={styles.productsWrapper}>
-        <FlatList
-          numColumns={2}
-          data={favorites}
-          renderItem={renderProducts}
-        />
+        <FlatList numColumns={2} data={favorites} renderItem={renderProducts} />
       </Layout>
     </Layout>
   )

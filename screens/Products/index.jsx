@@ -2,7 +2,7 @@ import { FlatList } from 'react-native'
 import React, { useEffect } from 'react'
 import styles from './styles'
 import { Button, Layout } from '@ui-kitten/components'
-import { ProductItem } from 'components/componentList'
+import { Header, ProductItem } from 'components/componentList'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from 'redux/slices/products/extraActions'
 import {
@@ -85,7 +85,7 @@ const Products = ({navigation}) => {
 
   return (
     <Layout style={styles.container}>
-      <Button onPress={handleTheme}>SwitchTheme</Button>
+      <Header title='Products' />
       <Layout style={styles.productsWrapper}>
         <FlatList
           numColumns={2}

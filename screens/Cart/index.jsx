@@ -2,7 +2,7 @@ import { FlatList } from 'react-native'
 import React, { useEffect } from 'react'
 import themedStyles from './styles'
 import { Button, Layout, Text } from '@ui-kitten/components'
-import { CartItem } from 'components/componentList'
+import { CartItem, Header } from 'components/componentList'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from 'redux/slices/products/extraActions'
 import {
@@ -73,8 +73,8 @@ const Cart = () => {
 
   return (
     <Layout style={styles.container}>
+      <Header title="Cart" />
       <Layout style={styles.productsWrapper}>
-        <Button onPress={handleTheme}>SwitchTheme</Button>
         <FlatList
           data={cart}
           renderItem={renderProducts}

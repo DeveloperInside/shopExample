@@ -52,3 +52,13 @@ export const removeLocalAsyncData = async key => {
     alert('Error while removing data: ' + key + e)
   }
 }
+
+export function getUniqueValuesByKey(array, key) {
+  const values = [];
+  array.forEach((item) => {
+    if (!values.includes(item[key])) {
+      values.push(item[key]);
+    }
+  });
+  return values;
+}

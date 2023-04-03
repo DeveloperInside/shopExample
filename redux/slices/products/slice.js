@@ -15,6 +15,14 @@ const initialState = {
   pickedProduct: {},
   currentPage: 1,
   fetchLimit: 12,
+  queryParams: {
+    page: 1,
+    limit: 12,
+    name: '',
+    brand: '',
+    sortBy: 'name',
+    order: 'asc'
+  },
   error: {},
 }
 
@@ -23,7 +31,7 @@ export const productsSlice = createSlice({
   initialState,
   reducers: {
     fetchMore: state => {
-      state.currentPage += 1
+      state.queryParams.page += 1
     },
     addToFavorites: (state, action) => {
       state.favorites = [...state.favorites, action.payload]

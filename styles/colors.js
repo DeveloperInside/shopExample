@@ -13,6 +13,7 @@ const colors = {
     tabBarIcon_x: '#1A34B8',
     badge: '#3B9B15',
     badgeText: '#f5f5f5',
+    danger:'#eb2020',
   },
   dark: {
     button: '#3366FF',
@@ -27,6 +28,7 @@ const colors = {
     tabBarIcon_x: '#A6C1FF',
     badge: '#3B9B15',
     badgeText: '#f5f5f5',
+    danger:'#eb2020',
   }
 }
 

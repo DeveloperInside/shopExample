@@ -1,6 +1,8 @@
-// // import { setLoadingFalse, setLoadingTrue } from 'redux/slices/loading/slice';
-// // import { store } from 'redux/store';
 import { delay } from 'utils/functions'
+
+// An API call handler that I used in a previous project. 
+// It includes more features than were actually required for that project, 
+// but it could be useful for gaining insights into use cases for other projects.
 
 const handleAPICall = async ({
   apiCall,
@@ -8,10 +10,8 @@ const handleAPICall = async ({
   successCallback,
   errorCallback,
   delayDuration,
-  silence,
 }) => {
   try {
-    // // !silence && store.dispatch(setLoadingTrue());
     const response = await apiCall()
     // Wait response for successCallback. It escapes async run of successCallback.
     const successCallbackData =
@@ -20,10 +20,8 @@ const handleAPICall = async ({
     if (successCallbackData !== null && successCallbackData !== undefined) {
       response.data['successCallbackData'] = successCallbackData
     }
-    // // store.dispatch(setLoadingFalse());
     return response.data
   } catch (error) {
-    // // store.dispatch(setLoadingFalse());
 
     //Switch state created for avoiding elseif chain. This approach can be found on:
     //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch#an_alternative_to_if...else_chains

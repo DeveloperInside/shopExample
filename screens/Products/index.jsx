@@ -1,7 +1,7 @@
-import { FlatList, TouchableOpacity } from 'react-native'
+import { FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import styles from './styles'
-import { Button, Card, Input, Layout, Modal, Text } from '@ui-kitten/components'
+import { Button, Input, Layout, Modal, Text } from '@ui-kitten/components'
 import { FilterModal, Header, ProductItem } from 'components/componentList'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from 'redux/slices/products/extraActions'
@@ -9,7 +9,6 @@ import {
   selectCart,
   selectCurrentPage,
   selectFavorites,
-  selectFetchLimit,
   selectProducts,
   selectQueryParams,
 } from 'redux/slices/products/selectors'
@@ -17,9 +16,11 @@ import {
   addToCart,
   addToFavorites,
   fetchMore,
+  flushProducts,
   pickProduct,
   removeFromCart,
   removeFromFavorites,
+  updateQuery,
 } from 'redux/slices/products/slice'
 import screens from 'navigation/screenLinking'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -29,7 +30,6 @@ const Products = ({ navigation }) => {
 
   const productList = useSelector(selectProducts)
   const currentPage = useSelector(selectCurrentPage)
-  const fetchLimit = useSelector(selectFetchLimit)
   const favorites = useSelector(selectFavorites)
   const cart = useSelector(selectCart)
   const queryParams = useSelector(selectQueryParams)
@@ -38,17 +38,23 @@ const Products = ({ navigation }) => {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    dispatch(fetchProducts(queryParams))
-  }, [currentPage, fetchLimit, queryParams])
+    if (currentPage !== 1) {
+      dispatch(fetchProducts({ ...queryParams, page: currentPage }))
+    }
+  }, [currentPage])
 
-  const handleSearch = () => {
-    const fetchQuery =
-      'page=' + currentPage + '&limit=' + fetchLimit + '&name=' + searchTerm
-    dispatch(fetchProducts(queryParams))
-  }
+  useEffect(() => {
+    // when queryParams changed, at first, flush the products list
+    dispatch(flushProducts())
+    dispatch(fetchProducts({ ...queryParams, page: currentPage }))
+  }, [queryParams])
 
   const handleScrollEnd = () => {
     dispatch(fetchMore())
+  }
+
+  const handleSearch = () => {
+    dispatch(updateQuery({ ...queryParams, name: searchTerm }))
   }
 
   const handleProductPress = item => {
@@ -70,6 +76,15 @@ const Products = ({ navigation }) => {
       return
     }
     dispatch(addToCart(item))
+  }
+
+  // handle filtering
+  const handleBrandFilter = brand => {
+    dispatch(updateQuery({ ...queryParams, brand: brand }))
+  }
+
+  const handleSort = sort => {
+    dispatch(updateQuery({ ...queryParams, order: sort }))
   }
 
   const renderProducts = ({ item }) => {
@@ -94,22 +109,23 @@ const Products = ({ navigation }) => {
     <Layout style={styles.container}>
       <Header title="Products" />
       <Layout style={styles.productsWrapper}>
-        <Input
-          placeholder="Search for products..."
-          value={searchTerm}
-          onChangeText={setSearchTerm}
-        />
-        <Button
-          style={{
-            paddingTop: 5,
-            paddingBottom: 5,
-          }}
-          onPress={handleSearch}>
-          <Text>
-            <Icon name="saved-search" size={25} />
-          </Text>
-        </Button>
-        <Button onPress={() => setVisible(true)}>TOGGLE MODAL</Button>
+        <Layout style={styles.searchContainer} level='3'>
+          <Input
+            style={styles.searchInput}
+            placeholder="Search for products..."
+            value={searchTerm}
+            onChangeText={setSearchTerm}
+          />
+          <Button style={styles.searchButton} onPress={handleSearch}>
+            <Text>
+              <Icon name="saved-search" size={25} />
+            </Text>
+          </Button>
+          <Button style={styles.searchButton} onPress={() => setVisible(true)}>
+            Filter
+          </Button>
+        </Layout>
+
         <FlatList
           numColumns={2}
           data={productList}
@@ -121,7 +137,11 @@ const Products = ({ navigation }) => {
         visible={visible}
         backdropStyle={styles.backdrop}
         onBackdropPress={() => setVisible(false)}>
-          <FilterModal />
+        <FilterModal
+          onBrandSelect={handleBrandFilter}
+          onSortSelect={handleSort}
+          selectedBrand={queryParams?.brand}
+        />
       </Modal>
     </Layout>
   )

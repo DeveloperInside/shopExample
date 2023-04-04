@@ -1,15 +1,24 @@
 import { StyleSheet } from 'react-native'
-import commonStyles from '../../styles/commonStyles'
+import commonStyles, { sizes } from 'styles/commonStyles'
 
 const styles = StyleSheet.create({
   container: {
     ...commonStyles.container,
   },
   productsWrapper: {
-    flex: 1
+    ...commonStyles.container,
   },
-  text: {
-    textAlign: 'center',
+  searchContainer: {
+    flexDirection: 'row',
+    padding: sizes.general.ms
+  },
+  searchInput: {
+    flexGrow: 1,
+    marginRight: sizes.general.md
+  },
+  searchButton: {
+    paddingVertical: sizes.general.sm,
+    marginHorizontal: sizes.general.xs
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

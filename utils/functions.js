@@ -54,11 +54,23 @@ export const removeLocalAsyncData = async key => {
 }
 
 export function getUniqueValuesByKey(array, key) {
-  const values = [];
-  array.forEach((item) => {
+  const values = []
+  array.forEach(item => {
     if (!values.includes(item[key])) {
-      values.push(item[key]);
+      values.push(item[key])
     }
-  });
-  return values;
+  })
+  return values
+}
+
+export const nonEmptyParams = params => {
+  return Object.keys(params)
+    .filter(
+      key =>
+        params[key] !== undefined && params[key] !== null && params[key] !== ''
+    )
+    .reduce((result, key) => {
+      result[key] = params[key]
+      return result
+    }, {})
 }

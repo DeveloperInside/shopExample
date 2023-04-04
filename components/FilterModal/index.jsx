@@ -1,11 +1,11 @@
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Button, Card, Layout, Text } from '@ui-kitten/components'
+import { Card, Layout, Text } from '@ui-kitten/components'
 import themedStyles from './styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { theme } from 'theme/ThemeProvider'
 
-const FilterModal = ({ onBrandSelect, onSortSelect, selectedItem }) => {
+const FilterModal = ({ onBrandSelect, onSortSelect, selectedBrand }) => {
   const styles = themedStyles()
   const colors = theme.colors()
 
@@ -13,7 +13,7 @@ const FilterModal = ({ onBrandSelect, onSortSelect, selectedItem }) => {
     <Card disabled={true}>
       <Layout>
         <Text>Filter By Brand:</Text>
-        <Layout style={styles.brandContainer}>
+        <Layout style={styles.container}>
           <TouchableOpacity
             onPress={() => {
               onBrandSelect && onBrandSelect('Tesla')
@@ -22,7 +22,7 @@ const FilterModal = ({ onBrandSelect, onSortSelect, selectedItem }) => {
               <Text
                 style={[
                   styles.brandText,
-                  selectedItem === 'Tesla' && styles.brandTextSelected,
+                  selectedBrand === 'Tesla' && styles.brandTextSelected,
                 ]}>
                 Tesla
               </Text>
@@ -36,7 +36,7 @@ const FilterModal = ({ onBrandSelect, onSortSelect, selectedItem }) => {
               <Text
                 style={[
                   styles.brandText,
-                  selectedItem === 'Ford' && styles.brandTextSelected,
+                  selectedBrand === 'Ford' && styles.brandTextSelected,
                 ]}>
                 Ford
               </Text>
@@ -50,7 +50,7 @@ const FilterModal = ({ onBrandSelect, onSortSelect, selectedItem }) => {
               <Text
                 style={[
                   styles.brandText,
-                  selectedItem === 'Ferrari' && styles.brandTextSelected,
+                  selectedBrand === 'Ferrari' && styles.brandTextSelected,
                 ]}>
                 Ferrari
               </Text>
@@ -67,11 +67,24 @@ const FilterModal = ({ onBrandSelect, onSortSelect, selectedItem }) => {
         </Layout>
         <Text>Sort:</Text>
         <Layout>
-          <Text>ascending</Text>
-          <Text>descending</Text>
+          <Layout style={styles.container}>
+            <TouchableOpacity
+              style={styles.sortIcon}
+              onPress={() => {
+                onSortSelect && onSortSelect('asc')
+              }}>
+              <Icon name="order-alphabetical-ascending" size={24} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.sortIcon}
+              onPress={() => {
+                onSortSelect && onSortSelect('desc')
+              }}>
+              <Icon name="order-alphabetical-descending" size={24} />
+            </TouchableOpacity>
+          </Layout>
         </Layout>
       </Layout>
-      <Button onPress={() => setVisible(false)}>DISMISS</Button>
     </Card>
   )
 }

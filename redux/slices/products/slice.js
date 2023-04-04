@@ -16,12 +16,11 @@ const initialState = {
   currentPage: 1,
   fetchLimit: 12,
   queryParams: {
-    page: 1,
     limit: 12,
     name: '',
     brand: '',
     sortBy: 'name',
-    order: 'asc'
+    order: 'asc',
   },
   error: {},
 }
@@ -31,7 +30,7 @@ export const productsSlice = createSlice({
   initialState,
   reducers: {
     fetchMore: state => {
-      state.queryParams.page += 1
+      state.currentPage += 1
     },
     addToFavorites: (state, action) => {
       state.favorites = [...state.favorites, action.payload]
@@ -42,7 +41,7 @@ export const productsSlice = createSlice({
       )
     },
     addToCart: (state, action) => {
-      state.cart = [...state.cart, {...action.payload, count: 1}]
+      state.cart = [...state.cart, { ...action.payload, count: 1 }]
     },
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter(
@@ -51,6 +50,13 @@ export const productsSlice = createSlice({
     },
     pickProduct: (state, action) => {
       state.pickedProduct = action.payload
+    },
+    updateQuery: (state, action) => {
+      state.queryParams = action.payload
+    },
+    flushProducts: state => {
+      state.products = []
+      state.currentPage = 1
     },
   },
   extraReducers: builder => {
@@ -69,7 +75,15 @@ export const productsSlice = createSlice({
   },
 })
 
-export const { fetchMore, addToFavorites, removeFromFavorites, addToCart, removeFromCart, pickProduct } =
-  productsSlice.actions
+export const {
+  fetchMore,
+  addToFavorites,
+  removeFromFavorites,
+  addToCart,
+  removeFromCart,
+  pickProduct,
+  updateQuery,
+  flushProducts,
+} = productsSlice.actions
 
 export default productsSlice.reducer

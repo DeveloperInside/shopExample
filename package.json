@@ -26,6 +26,8 @@
     "react-native-svg": "^13.9.0",
     "react-native-vector-icons": "^9.2.0",
     "react-redux": "^8.0.5",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
     "ts-jest": "^29.1.0"
   },
   "devDependencies": {

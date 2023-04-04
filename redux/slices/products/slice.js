@@ -30,7 +30,7 @@ export const productsSlice = createSlice({
   initialState,
   reducers: {
     fetchMore: state => {
-      state.currentPage += 1
+      state.currentPage = state.currentPage + 1
     },
     addToFavorites: (state, action) => {
       state.favorites = [...state.favorites, action.payload]

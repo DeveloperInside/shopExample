@@ -73,14 +73,18 @@ const FilterModal = ({ onBrandSelect, onSortSelect, selectedBrand }) => {
               onPress={() => {
                 onSortSelect && onSortSelect('asc')
               }}>
-              <Icon name="order-alphabetical-ascending" size={24} />
+              <Text>
+                <Icon name="order-alphabetical-ascending" size={24} />
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.sortIcon}
               onPress={() => {
                 onSortSelect && onSortSelect('desc')
               }}>
-              <Icon name="order-alphabetical-descending" size={24} />
+              <Text>
+                <Icon name="order-alphabetical-descending" size={24} />
+              </Text>
             </TouchableOpacity>
           </Layout>
         </Layout>

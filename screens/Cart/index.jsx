@@ -1,21 +1,16 @@
 import { FlatList } from 'react-native'
-import React, { useEffect } from 'react'
+import React from 'react'
 import themedStyles from './styles'
-import { Button, Layout, Text } from '@ui-kitten/components'
+import { Layout, Text } from '@ui-kitten/components'
 import { CartItem, Header } from 'components/componentList'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts } from 'redux/slices/products/extraActions'
 import {
   selectCart,
-  selectCurrentPage,
   selectFavorites,
-  selectFetchLimit,
-  selectProducts,
 } from 'redux/slices/products/selectors'
 import {
   addToCart,
   addToFavorites,
-  fetchMore,
   removeFromCart,
   removeFromFavorites,
 } from 'redux/slices/products/slice'

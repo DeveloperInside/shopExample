@@ -1,7 +1,7 @@
 import { FlatList } from 'react-native'
 import React from 'react'
 import styles from './styles'
-import { Button, Layout } from '@ui-kitten/components'
+import { Layout } from '@ui-kitten/components'
 import { Header, ProductItem } from 'components/componentList'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCart, selectFavorites } from 'redux/slices/products/selectors'
@@ -11,17 +11,12 @@ import {
   removeFromCart,
   removeFromFavorites,
 } from 'redux/slices/products/slice'
-import { toggleTheme } from 'redux/slices/theme/slice'
 
 const Favorites = () => {
   const dispatch = useDispatch()
 
   const favorites = useSelector(selectFavorites)
   const cart = useSelector(selectCart)
-
-  const handleTheme = () => {
-    dispatch(toggleTheme())
-  }
 
   const handleHeartPress = (item, isFavorite) => {
     if (isFavorite) {

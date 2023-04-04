@@ -23,7 +23,6 @@ const styles = () => {
     text: {
       ...fonts.header,
     },
-
   })
 }
 

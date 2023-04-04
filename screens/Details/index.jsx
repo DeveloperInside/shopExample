@@ -5,7 +5,7 @@ import {
   selectCart,
   selectPickedProduct,
 } from 'redux/slices/products/selectors'
-import { Button, Input, Layout, Text } from '@ui-kitten/components'
+import { Button, Layout, Text } from '@ui-kitten/components'
 import themedStyles from './styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import screens, { stacks } from 'navigation/screenLinking'
@@ -34,10 +34,14 @@ const Details = ({ navigation }) => {
     navigation.navigate(stacks.Tab.name, { screen: screens.Cart.name })
   }
 
+  const handleBackPressed = () => {
+    navigation.goBack()
+  }
+
   console.log(secureImage)
   return (
     <Layout style={styles.container}>
-      <Header title="Details" />
+      <Header title="Details" backButton={handleBackPressed} />
       <Image
         source={{ uri: secureImage }}
         style={{ width: '100%', aspectRatio: 4 / 3 }}
